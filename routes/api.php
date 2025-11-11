@@ -22,3 +22,9 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/users/{id}', [UserController::class,'update']);
    Route::delete('/users/{id}', [UserController::class,'destroy']);
 });
+
+Route::middleware('auth:api')->group(function () {
+    Route::apiResource('roles', RoleController::class)->except(['create', 'edit']);
+    Route::get('/permissions', [PermissionController::class, 'index']);
+    Route::post('/permissions', [PermissionController::class, 'store']);
+});
